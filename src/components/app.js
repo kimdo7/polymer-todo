@@ -15,15 +15,36 @@ class TodoApp extends LitElement {
         this.todoList = list === null ? [] : list
     }
 
-    _firstRendered(){
+    _firstRendered() {
         this.addEventListener("addItem", (e) => {
             this.todoList = e.detail.todoList
+        })
+
+        this.addEventListener("removeItem", (e) => {
+            let index = this.todoList.map(function (item) {
+                return item.id
+            }).indexOf(e.detail.itemId)
+
+            this.todoList.splice(index, 1)
+            this.todoList = _.clone(this.todoList)
+            localStorage.setItem("todo-list", JSON.stringify(this.todoList))
+
+        })
+
+        this.addEventListener("changeItem", (e) => {
+            let index = this.todoList.map(function (item) {
+                return item.id
+            }).indexOf(e.detail.itemId)
+
+            this.todoList[index].done = !this.todoList[index].done
+            this.todoList = _.clone(this.todoList)
+            localStorage.setItem("todo-list", JSON.stringify(this.todoList))
+
         })
     }
 
     _render({ todoList }) {
         return html`
-        <p>hello todo app :)</p>
         <add-item></add-item>
         <list-items todoList=${todoList}></list-items>
         `

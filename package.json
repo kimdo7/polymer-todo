@@ -5,7 +5,8 @@
         "@polymer/lit-element": "^0.5.2",
         "@polymer/polymer": "^3.0.0",
         "browser-sync": "^2.26.5",
-        "concurrently": "^4.1.0"
+        "concurrently": "^4.1.0",
+        "lodash": "^4.17.11"
     },
     "devDependencies": {
         "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
